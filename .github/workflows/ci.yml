@@ -183,6 +183,8 @@ jobs:
       - run: cp bin-ubuntu-20.04/splunk-*.zip ./splunk-opentelemetry-dotnet-linux-glibc.zip
       - run: cp bin-windows-2022/splunk-*.zip ./splunk-opentelemetry-dotnet-windows.zip
       - run: cp bin-macos-11/splunk-*.zip ./splunk-opentelemetry-dotnet-macos.zip
+      - run: cp installation-scripts/splunk-otel-dotnet-install.sh ./splunk-otel-dotnet-install.sh
+      - run: cp installation-scripts/Splunk.OTel.DotNet.psm1 ./Splunk.OTel.DotNet.psm1
       - name: Calculate checksum
         run: sha256sum ./*.zip ./nuget-package/*.nupkg ./splunk-otel-dotnet-install.sh ./Splunk.OTel.DotNet.psm1 >> checksum.txt
       - name: Create Release
