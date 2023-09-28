@@ -219,6 +219,7 @@ Copyright The OpenTelemetry Authors under Apache License Version 2.0
     Target Workflow => _ => _
         .DependsOn(Clean)
         .DependsOn(Restore)
+        .DependsOn(BuildInstallationScripts)
         .DependsOn(DownloadAutoInstrumentationDistribution)
         .DependsOn(UnpackAutoInstrumentationDistribution)
         .DependsOn(Compile)

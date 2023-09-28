@@ -49,7 +49,7 @@ jobs:
         shell: powershell
         run: |
           $log_path = "C:\ProgramData\OpenTelemetry .NET AutoInstrumentation\logs\*"
-          Import-Module "${PWD}/Splunk.OTel.DotNet.psm1"
+          Import-Module "${PWD}/InstallationScripts/Splunk.OTel.DotNet.psm1"
           [System.Environment]::SetEnvironmentVariable("SPLUNK_OTEL_DOTNET_AUTO_INSTALL_DIR", "${PWD}\OpenTelemetryDistribution", [System.EnvironmentVariableTarget]::Machine)
           Register-OpenTelemetryForCurrentSession -OTelServiceName "MyServiceDisplayName"
           ./test/test-applications/integrations/TestApplication.Smoke/bin/x64/Release/net7.0/TestApplication.Smoke.exe
@@ -148,29 +148,11 @@ jobs:
       - name: Test NuGet Package
         run: ./build.cmd TestNuGetPackage
 
-
-  build-scripts:
-    runs-on: windows-2022
-    steps:
-      - uses: actions/checkout@v4.1.0
-        with:
-          fetch-depth: 0 # fetching all, needed to correctly calculate version
-      - uses: actions/setup-dotnet@v3.2.0
-        with:
-          dotnet-version: | 
-            6.0.413
-            7.0.400
-      - run: ./build.cmd BuildScriptsWorkflow
-      - uses: actions/upload-artifact@v3.1.3
-        with:
-          name: installation-scripts
-          path: InstallationScripts/
-
   create-release:
     if: github.ref_type == 'tag'
     name: Create GitHub release
     runs-on: ubuntu-20.04
-    needs: [ build, container-build, build-nuget-package, test-nuget-package, build-scripts ]
+    needs: [ build, container-build, build-nuget-package, test-nuget-package ]
     permissions:
       contents: write
     timeout-minutes: 10
@@ -183,8 +165,8 @@ jobs:
       - run: cp bin-ubuntu-20.04/splunk-*.zip ./splunk-opentelemetry-dotnet-linux-glibc.zip
       - run: cp bin-windows-2022/splunk-*.zip ./splunk-opentelemetry-dotnet-windows.zip
       - run: cp bin-macos-11/splunk-*.zip ./splunk-opentelemetry-dotnet-macos.zip
-      - run: cp installation-scripts/splunk-otel-dotnet-install.sh ./splunk-otel-dotnet-install.sh
-      - run: cp installation-scripts/Splunk.OTel.DotNet.psm1 ./Splunk.OTel.DotNet.psm1
+      - run: cp bin-windows-2022/splunk-otel-dotnet-install.sh ./splunk-otel-dotnet-install.sh
+      - run: cp bin-windows-2022/Splunk.OTel.DotNet.psm1 ./Splunk.OTel.DotNet.psm1
       - name: Calculate checksum
         run: sha256sum ./*.zip ./nuget-package/*.nupkg ./splunk-otel-dotnet-install.sh ./Splunk.OTel.DotNet.psm1 >> checksum.txt
       - name: Create Release

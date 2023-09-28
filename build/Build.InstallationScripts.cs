@@ -19,8 +19,4 @@ partial class Build : NukeBuild
                     x.Replace("VERSION_PLACEHOLDER", VersionHelper.GetVersion()));
             }
         });
-
-    Target BuildScriptsWorkflow => _ => _
-        .DependsOn(Clean)
-        .DependsOn(BuildInstallationScripts);
 }
