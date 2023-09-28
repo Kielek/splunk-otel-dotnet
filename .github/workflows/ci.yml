@@ -148,11 +148,29 @@ jobs:
       - name: Test NuGet Package
         run: ./build.cmd TestNuGetPackage
 
+
+  build-scripts:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4.1.0
+        with:
+          fetch-depth: 0 # fetching all, needed to correctly calculate version
+      - uses: actions/setup-dotnet@v3.2.0
+        with:
+          dotnet-version: | 
+            6.0.413
+            7.0.400
+      - run: ./build.cmd BuildScriptsWorkflow
+      - uses: actions/upload-artifact@v3.1.3
+        with:
+          name: installation-scripts
+          path: InstallationScripts/
+
   create-release:
     if: github.ref_type == 'tag'
     name: Create GitHub release
     runs-on: ubuntu-20.04
-    needs: [ build, container-build, build-nuget-package, test-nuget-package ]
+    needs: [ build, container-build, build-nuget-package, test-nuget-package, build-scripts ]
     permissions:
       contents: write
     timeout-minutes: 10
