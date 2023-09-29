@@ -165,11 +165,11 @@ jobs:
         with:
           path: .
       - run: cp bin-alpine/splunk-*.zip ./splunk-opentelemetry-dotnet-linux-musl.zip
-      - run: cp bin-ubuntu-20.04/splunk-*.zip ./splunk-opentelemetry-dotnet-linux-glibc.zip
-      - run: cp bin-windows-2022/splunk-*.zip ./splunk-opentelemetry-dotnet-windows.zip
-      - run: cp bin-macos-11/splunk-*.zip ./splunk-opentelemetry-dotnet-macos.zip
-      - run: cp bin-windows-2022/splunk-otel-dotnet-install.sh ./splunk-otel-dotnet-install.sh
-      - run: cp bin-windows-2022/Splunk.OTel.DotNet.psm1 ./Splunk.OTel.DotNet.psm1
+      - run: cp bin-ubuntu-20.04/bin/splunk-*.zip ./splunk-opentelemetry-dotnet-linux-glibc.zip
+      - run: cp bin-windows-2022/bin/splunk-*.zip ./splunk-opentelemetry-dotnet-windows.zip
+      - run: cp bin-macos-11/bin/splunk-*.zip ./splunk-opentelemetry-dotnet-macos.zip
+      - run: cp bin-windows-2022/InstallationScripts/splunk-otel-dotnet-install.sh ./splunk-otel-dotnet-install.sh
+      - run: cp bin-windows-2022/InstallationScripts/Splunk.OTel.DotNet.psm1 ./Splunk.OTel.DotNet.psm1
       - name: Calculate checksum
         run: sha256sum ./*.zip ./nuget-package/*.nupkg ./splunk-otel-dotnet-install.sh ./Splunk.OTel.DotNet.psm1 >> checksum.txt
       - name: Create Release
