@@ -63,7 +63,10 @@ jobs:
       - uses: actions/upload-artifact@v3.1.3
         with:
           name: bin-${{ matrix.machine }}
-          path: bin/splunk-*.zip
+          path: |
+            bin/splunk-*.zip
+            InstallationScripts/splunk-otel-dotnet-install.sh
+            InstallationScripts/Splunk.OTel.DotNet.psm1
 
   container-build:
     strategy:
