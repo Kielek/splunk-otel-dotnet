@@ -16,15 +16,15 @@
 #    used and must be availabe in the image.
 FROM busybox
 
-LABEL org.opencontainers.image.source="https://github.com/signalfx/splunk-otel-dotnet"
-LABEL org.opencontainers.image.description="Splunk Distribution of OpenTelemetry .NET"
+LABEL org.opencontainers.image.source="https://github.com/Kielek/splunk-otel-dotnet"
+LABEL org.opencontainers.image.description="Splunk Distribution of OpenTelemetry .NET by Kielek"
 
 ARG RELEASE_VER
 
 WORKDIR /autoinstrumentation
 
-ADD https://github.com/signalfx/splunk-otel-dotnet/releases/download/v$RELEASE_VER/opentelemetry-dotnet-instrumentation-linux-glibc.zip .
-ADD https://github.com/signalfx/splunk-otel-dotnet/releases/download/v$RELEASE_VER/opentelemetry-dotnet-instrumentation-linux-musl.zip .
+ADD https://github.com/Kielek/splunk-otel-dotnet/releases/download/v$RELEASE_VER/opentelemetry-dotnet-instrumentation-linux-glibc.zip .
+ADD https://github.com/Kielek/splunk-otel-dotnet/releases/download/v$RELEASE_VER/opentelemetry-dotnet-instrumentation-linux-musl.zip .
 
 RUN unzip opentelemetry-dotnet-instrumentation-linux-glibc.zip &&\
     unzip opentelemetry-dotnet-instrumentation-linux-musl.zip "linux-musl-x64/*" -d . &&\
