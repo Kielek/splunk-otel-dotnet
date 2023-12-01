@@ -24,9 +24,9 @@ ARG RELEASE_VER
 WORKDIR /autoinstrumentation
 
 ADD https://github.com/Kielek/splunk-otel-dotnet/releases/download/$RELEASE_VER/splunk-opentelemetry-dotnet-linux-glibc.zip .
-ADD https://github.com/Kielek/splunk-otel-dotnet/releases/download/$RELEASE_VER/splunk-opentelemetry-dotnet-linux-glibc.zip .
+ADD https://github.com/Kielek/splunk-otel-dotnet/releases/download/$RELEASE_VER/splunk-opentelemetry-dotnet-linux-musl.zip .
 
 RUN unzip splunk-opentelemetry-dotnet-linux-glibc.zip &&\
-    unzip splunk-opentelemetry-dotnet-linux-glibc.zip "linux-musl-x64/*" -d . &&\
-    rm splunk-opentelemetry-dotnet-linux-glibc.zip splunk-opentelemetry-dotnet-linux-glibc.zip &&\
+    unzip splunk-opentelemetry-dotnet-linux-musl.zip "linux-musl-x64/*" -d . &&\
+    rm splunk-opentelemetry-dotnet-linux-glibc.zip splunk-opentelemetry-dotnet-linux-musl.zip &&\
     chmod -R go+r .
