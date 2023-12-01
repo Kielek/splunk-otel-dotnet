@@ -50,8 +50,8 @@ jobs:
           build-args: |
             RELEASE_VER=${{ env.RELEASE_VERSION }}
           tags: |
-            ghcr.io/Kielek/splunk-otel-dotnet/splunk-otel-dotnet:latest
-            ghcr.io/Kielek/splunk-otel-dotnet/splunk-otel-dotnet:${{ env.MAJOR_VERSION }}
-            ghcr.io/Kielek/splunk-otel-dotnet/splunk-otel-dotnet:${{ env.RELEASE_VERSION }}
+            ghcr.io/kielek/splunk-otel-dotnet/splunk-otel-dotnet:latest
+            ghcr.io/kielek/splunk-otel-dotnet/splunk-otel-dotnet:${{ env.MAJOR_VERSION }}
+            ghcr.io/kielek/splunk-otel-dotnet/splunk-otel-dotnet:${{ env.RELEASE_VERSION }}
 
 
